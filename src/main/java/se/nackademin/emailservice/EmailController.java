@@ -24,11 +24,14 @@ public class EmailController {
 	private Emailservice emailservice;
 
 	@PostMapping("/sendemail")
-	public ResponseEntity<String> sendemail(@RequestBody EmailRequest emailrequest) {
+	public ResponseEntity<Object> sendemail(@RequestBody EmailRequest emailrequest) {
 
 		Response response = emailservice.sendemail(emailrequest);
-		if (response.getStatusCode() == 200 || response.getStatusCode() == 202)
-			return new ResponseEntity<>("send successfully", HttpStatus.OK);
+		if (response.getStatusCode() == 200 || response.getStatusCode() == 202){
+			EmailResponse emailResponse = new EmailResponse("send successfully");
+			return  ResponseEntity.ok(emailResponse);
+		}
+
 		return new ResponseEntity<>("failed to sent", HttpStatus.NOT_FOUND);
 	}
 }
