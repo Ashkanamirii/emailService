@@ -7,9 +7,11 @@ import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.nackademin.emailservice.EmailRequest;
+import se.nackademin.emailservice.config.MailConfig;
 
 import java.io.IOException;
 
@@ -21,20 +23,21 @@ import java.io.IOException;
  * Copyright: MIT
  */
 
-
+@AllArgsConstructor
 @Service
 public class Emailservice {
 
 
 	@Autowired
-	SendGrid sendGrid;
+	MailConfig mailConfig;
 
 	public Response sendemail(EmailRequest emailrequest) {
+		Email from = mailConfig.getFromEmail();
 
-		Mail mail = new Mail(new Email("Hakim.Livs.grp3@gmail.com"),
+		Mail mail = new Mail(from,
 				emailrequest.getSubject(), new Email(emailrequest.getTo()),
 				new Content("text/plain", emailrequest.getBody()));
-	
+
 		Request request = new Request();
 
 		Response response = null;
@@ -47,7 +50,7 @@ public class Emailservice {
 
 			request.setBody(mail.build());
 
-			response = this.sendGrid.api(request);
+			response = this.mailConfig.getSendGrid().api(request);
 
 		} catch (IOException ex) {
 
