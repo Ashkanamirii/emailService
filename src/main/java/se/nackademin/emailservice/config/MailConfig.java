@@ -17,21 +17,16 @@ public class MailConfig {
 
 	@Value("${sendgrid.key}")
 	private String key;
+
 	@Value("${sendgrid.from.mail}")
 	private String fromEmail;
 
-	private SendGrid sendGrid;
-
-	public String getKey() {
-		return key;
-	}
-
 	public Email getFromEmail() {
-		return new Email(fromEmail);
+		return new Email(this.fromEmail);
 	}
 
 	public SendGrid getSendGrid() {
-		return new SendGrid(key);
+		return new SendGrid(this.key);
 	}
 
 }

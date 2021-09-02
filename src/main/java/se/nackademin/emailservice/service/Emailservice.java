@@ -28,8 +28,8 @@ import java.io.IOException;
 public class Emailservice {
 
 
-	@Autowired
-	MailConfig mailConfig;
+
+	private final MailConfig mailConfig;
 
 	public Response sendemail(EmailRequest emailrequest) {
 		Email from = mailConfig.getFromEmail();
