@@ -3,11 +3,9 @@ package se.nackademin.emailservice.service;
 import com.sendgrid.Method;
 import com.sendgrid.Request;
 import com.sendgrid.Response;
-import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.Mail;
 import com.sendgrid.helpers.mail.objects.Content;
 import com.sendgrid.helpers.mail.objects.Email;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import se.nackademin.emailservice.EmailRequest;
@@ -23,14 +21,17 @@ import java.io.IOException;
  * Copyright: MIT
  */
 
-@AllArgsConstructor
+
 @Service
 public class Emailservice {
 
-
+	private final MailConfig mailConfig;
 
 	@Autowired
-	private final MailConfig mailConfig;
+	public Emailservice(MailConfig mailConfig) {
+		this.mailConfig = mailConfig;
+	}
+
 
 	public Response sendemail(EmailRequest emailrequest) {
 		Email from = mailConfig.getFromEmail();
