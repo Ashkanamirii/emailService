@@ -29,6 +29,7 @@ public class Emailservice {
 
 
 
+	@Autowired
 	private final MailConfig mailConfig;
 
 	public Response sendemail(EmailRequest emailrequest) {

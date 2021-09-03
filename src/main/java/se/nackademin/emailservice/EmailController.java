@@ -15,7 +15,7 @@ import se.nackademin.emailservice.service.Emailservice;
  * Project: emailService
  * Copyright: MIT
  */
-@Controller
+@RestController
 @RequestMapping("/mail")
 @CrossOrigin
 public class EmailController {
