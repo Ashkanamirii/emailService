@@ -3,9 +3,9 @@ package se.nackademin.emailservice.config;
 import com.sendgrid.SendGrid;
 import com.sendgrid.helpers.mail.objects.Email;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.stereotype.Component;
 
 /**
  * Created by Ashkan Amiri
@@ -24,10 +24,12 @@ public class MailConfig {
 	@Value("${sendgrid.from.mail}")
 	private String fromEmail;
 
+	@Bean
 	public Email getFromEmail() {
 		return new Email(this.fromEmail);
 	}
 
+	@Bean
 	public SendGrid getSendGrid() {
 		return new SendGrid(this.key);
 	}
