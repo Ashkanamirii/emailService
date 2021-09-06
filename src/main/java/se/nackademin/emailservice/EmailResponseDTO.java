@@ -7,10 +7,10 @@ package se.nackademin.emailservice;
  * Project: emailService
  * Copyright: MIT
  */
-public class EmailResponse {
+public class EmailResponseDTO {
 	private String message;
 
-	public EmailResponse(String message) {
+	public EmailResponseDTO(String message) {
 		this.message = message;
 	}
 
